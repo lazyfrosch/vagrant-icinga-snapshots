@@ -1,0 +1,3 @@
+---
+profile::icingaweb2::php_mode: fpm
+profile::icingaweb2::fpm_service: rh-php71-php-fpm

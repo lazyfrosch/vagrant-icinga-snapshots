@@ -1,0 +1,18 @@
+---
+profile::linux::yumrepos:
+  icinga-release:
+    descr: icinga-release
+    baseurl: https://packages.icinga.com/epel/$releasever/release
+    gpgkey: https://packages.icinga.com/icinga.key
+    enabled: 1
+    gpgcheck: 1
+    # poor mans pinning
+    exclude: 'icinga2* icingaweb2* php-Icinga* icingacli'
+
+  icinga-snapshot:
+    descr: icinga-snapshot
+    baseurl: https://packages.icinga.com/epel/$releasever/snapshot
+    gpgkey: https://packages.icinga.com/icinga.key
+    enabled: 1
+    gpgcheck: 1
+    metadata_expire: 5m

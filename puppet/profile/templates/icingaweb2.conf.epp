@@ -1,6 +1,6 @@
 Alias /icingaweb2 "/usr/share/icingaweb2/public"
 
-<%#
+<%# for very old versions
 <IfVersion < 2.4>
     # Forward PHP requests to FPM
     SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
@@ -48,7 +48,7 @@ Alias /icingaweb2 "/usr/share/icingaweb2/public"
         ErrorDocument 404 /icingaweb2/error_norewrite.html
     </IfModule>
 
-<%#
+    <%- if $php_mode == 'fpm' { -%>
     <IfVersion >= 2.4>
         # Forward PHP requests to FPM
         SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
@@ -57,5 +57,5 @@ Alias /icingaweb2 "/usr/share/icingaweb2/public"
             ErrorDocument 503 /icingaweb2/error_unavailable.html
         </FilesMatch>
     </IfVersion>
-%>
+    <%- } -%>
 </Directory>

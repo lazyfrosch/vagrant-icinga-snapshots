@@ -6,7 +6,9 @@ class profile::icingaweb2 (
   $ido_username = 'icinga2',
   $ido_password = 'icinga2',
   $api_username = 'root',
-  $api_password = 'root,'
+  $api_password = 'root',
+  $php_mode     = 'mod_php',
+  $fpm_service  = 'php-fpm',
 ) {
   include profile::apache
 
@@ -43,14 +45,22 @@ class profile::icingaweb2 (
   Class['icinga2::repo'] -> Class['icingaweb2']
 
   apache::custom_config { 'icingaweb2':
-    content  => epp('profile/icingaweb2.conf'),
+    content  => epp('profile/icingaweb2.conf', {
+      php_mode => $php_mode,
+    }),
   }
 
-  include apache::mod::php
-
-  # service { 'rh-php71-php-fpm':
-  #   ensure  => running,
-  #   enable  => true,
-  #   require => Package['icingaweb2'],
-  # }
+  if $php_mode == 'mod_php' {
+    include apache::mod::php
+  } elsif $php_mode == 'fpm' {
+    if $fpm_service {
+      service { $fpm_service:
+        ensure  => running,
+        enable  => true,
+        require => Package['icingaweb2'],
+      }
+    }
+  } else {
+    fail("php_mode ${php_mode} not implemented!")
+  }
 }

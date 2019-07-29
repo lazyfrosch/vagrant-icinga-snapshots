@@ -10,6 +10,7 @@ hierarchy:
 
   - name: "Operatingsystem"
     paths:
+      - "os/%{facts.os.name}/%{facts.os.release.major}.yaml"
       - "os/%{facts.os.name}/%{facts.os.distro.codename}.yaml"
       - "os/%{facts.os.name}.yaml"
 

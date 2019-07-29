@@ -1,17 +1,25 @@
 class profile::linux(
   Hash[String, Hash] $ssh_keys = {},
+  $yumrepos                    = {},
 ) {
   include ntp
   include vagrantenv
 
-  if $facts['os']['family'] == 'Debian' {
-    include apt
-
-    # $_sources = lookup('apt::sources', Hash[String, Hash], 'hash', {}).each |$_title, $_config| {
-    #   apt::source { $_title:
-    #     * => $_config,
-    #   }
-    # }
+  $osfamily = $facts['os']['family']
+  case $osfamily {
+    /Debian/: {
+      include apt
+    }
+    /RedHat/: {
+      $yumrepos.each |$name, $config| {
+        yumrepo { $name:
+          * => $config,
+        }
+      }
+    }
+    default: {
+      # ignored for now
+    }
   }
 
   $_root_ssh_keys = prefix($ssh_keys, 'root-')

@@ -32,6 +32,7 @@ module_install puppetlabs-apt
 module_install puppetlabs-apache
 module_install puppetlabs-ntp
 module_install puppetlabs-mysql
+module_install puppetlabs-yumrepo_core
 
 module_install puppet-alternatives
 
