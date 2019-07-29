@@ -1,0 +1,48 @@
+---
+classes:
+  - profile::linux
+  - role::icinga_master
+
+#profile::icinga2::ticket_salt: NotSafeNotSafeNotSafeNotSafeNotSafeNotSafeNotSafeNotSafe
+#profile::icinga2::ca_host: master.icinga.local
+
+profile::icinga2::zone_name: master
+
+profile::icinga2::apiusers:
+  root:
+    password: password
+    permissions:
+      - '*'
+
+apt::sources:
+  icinga-release:
+    location: https://packages.icinga.com/debian
+    release: icinga-%{facts.os.distro.codename}
+    pin:
+      priority: 500
+      release: icinga-%{facts.os.distro.codename}
+    key:
+      id: F51A91A5EE001AA5D77D53C4C6E319C334410682
+      source: https://packages.icinga.com/icinga.key
+    before:
+      - 'Class[icinga2]'
+      - 'Class[icingaweb2]'
+
+  icinga-snapshots:
+    location: https://packages.icinga.com/debian
+    release: icinga-%{facts.os.distro.codename}-snapshots
+    pin:
+      priority: 900
+      release: icinga-%{facts.os.distro.codename}-snapshots
+    before:
+      - 'Class[icinga2]'
+      - 'Class[icingaweb2]'
+
+apt::pins:
+  debian-icinga:
+    priority: -10
+    originator: Debian
+    packages: '*icinga*'
+    before:
+      - 'Class[icinga2]'
+      - 'Class[icingaweb2]'

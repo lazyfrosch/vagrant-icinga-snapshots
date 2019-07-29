@@ -1,0 +1,17 @@
+---
+version: 5
+defaults:
+  datadir: /vagrant/puppet/hieradata
+  data_hash: yaml_data
+
+hierarchy:
+  - name: "Per-node data"
+    path: "nodes/%{facts.hostname}.yaml"
+
+  - name: "Operatingsystem"
+    paths:
+      - "os/%{facts.os.name}/%{facts.os.distro.codename}.yaml"
+      - "os/%{facts.os.name}.yaml"
+
+  - name: "Common data"
+    path: "common.yaml"

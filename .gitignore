@@ -1,0 +1,10 @@
+# Editors
+.*.sw[op]
+*~
+
+# Ruby
+/*.ruby-*
+
+# Vagrant
+/.vagrant
+/puppet/modules
