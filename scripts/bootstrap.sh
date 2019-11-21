@@ -86,12 +86,16 @@ case "${ID}" in
       zypper --gpg-auto-import-keys install -y puppet-agent
     fi
 
-    bindir=/usr/local/bin
+    bindir=/usr/bin
     if [ ! -e $bindir/puppet ]; then
       ln -s /opt/puppetlabs/bin/puppet $bindir/puppet
       ln -s /opt/puppetlabs/bin/facter $bindir/facter
       ln -s /opt/puppetlabs/bin/hiera $bindir/hiera
     fi
+
+    # Remove lock for bash-completion
+    # TODO: I don't know where this lock comes from
+    zypper removelock bash-completion
     ;;
   *)
     fail "System ID ${ID} is not supported!"
