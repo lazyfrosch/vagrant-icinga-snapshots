@@ -23,7 +23,7 @@ case "${ID}" in
 
     if [ "$(apt-key finger "${GPG_KEY}")" = "" ]; then
       echo "Installating GPG Key for Puppet"
-      apt-key adv --keyserver pgp.mit.edu --recv-key "${GPG_KEY}"
+      apt-key adv --keyserver pool.sks-keyservers.net --recv-key "${GPG_KEY}"
     fi
 
     if [ ! -e /etc/apt/sources.list.d/puppet6.list ]; then
