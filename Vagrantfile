@@ -13,6 +13,10 @@ Vagrant.configure('2') do |config|
   new_linux_vm config, 'centos-7', '192.168.33.52', 'bento/centos-7'
   new_linux_vm config, 'ubuntu-18-04', '192.168.33.53', 'bento/ubuntu-18.04'
 
+  new_linux_vm config, 'opensuse-15-1', '192.168.33.54', 'bento/opensuse-leap-15.1' do |vm|
+    vm.vbguest.auto_update = true if Vagrant.has_plugin?('vagrant-vbguest')
+  end
+
   config.vm.provider 'virtualbox' do |vb|
     vb.memory = '512'
   end
