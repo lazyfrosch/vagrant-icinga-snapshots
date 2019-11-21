@@ -11,6 +11,7 @@ Vagrant.configure('2') do |config|
 
   new_linux_vm config, 'debian-10', '192.168.33.51', 'bento/debian-10'
   new_linux_vm config, 'centos-7', '192.168.33.52', 'bento/centos-7'
+  new_linux_vm config, 'ubuntu-18-04', '192.168.33.53', 'bento/ubuntu-18.04'
 
   config.vm.provider 'virtualbox' do |vb|
     vb.memory = '512'
