@@ -72,6 +72,27 @@ case "${ID}" in
       yum install -y puppet-agent
     fi
     ;;
+  opensuse*|suse*)
+    version="$(echo "${VERSION}" | cut -d. -f1)"
+
+    if ! rpm -q puppet6-release &>/dev/null; then
+      echo "Installing puppet repository"
+      curl -o /tmp/puppet-release.rpm https://yum.puppetlabs.com/puppet6-release-sles-"${version}".noarch.rpm
+      rpm -Uvh /tmp/puppet-release.rpm
+    fi
+
+    if ! rpm -q puppet-agent &>/dev/null; then
+      echo "Installing Puppet Agent"
+      zypper --gpg-auto-import-keys install -y puppet-agent
+    fi
+
+    bindir=/usr/local/bin
+    if [ ! -e $bindir/puppet ]; then
+      ln -s /opt/puppetlabs/bin/puppet $bindir/puppet
+      ln -s /opt/puppetlabs/bin/facter $bindir/facter
+      ln -s /opt/puppetlabs/bin/hiera $bindir/hiera
+    fi
+    ;;
   *)
     fail "System ID ${ID} is not supported!"
     ;;
