@@ -1,2 +1,4 @@
 ---
+apache::apache_version: '2.4'
 apache::mod::php::php_version: '7'
+apache::mod::php::libphp_prefix: 'mod_php'
