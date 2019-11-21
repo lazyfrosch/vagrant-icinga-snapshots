@@ -1,6 +1,7 @@
 class profile::linux(
   Hash[String, Hash] $ssh_keys = {},
   $yumrepos                    = {},
+  $zypprepos                   = {},
 ) {
   include ntp
   include vagrantenv
@@ -17,7 +18,16 @@ class profile::linux(
         }
       }
     }
+    /Suse/: {
+      include zypprepo
+      $zypprepos.each |$name, $config| {
+        zypprepo { $name:
+          * => $config,
+        }
+      }
+    }
     default: {
+      fail("Unknown os ${facts['os']}")
       # ignored for now
     }
   }

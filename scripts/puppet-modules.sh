@@ -35,6 +35,7 @@ module_install puppetlabs-mysql
 module_install puppetlabs-yumrepo_core
 
 module_install puppet-alternatives
+module_install puppet-zypprepo
 
 module_install icinga-icinga2
 module_install icinga-icingaweb2

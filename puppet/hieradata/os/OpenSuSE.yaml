@@ -1,0 +1,21 @@
+---
+profile::linux::zypprepos:
+  icinga-release:
+    name: icinga-release
+    baseurl: https://packages.icinga.com/openSUSE/%{facts.os.release.full}/release
+    enabled: 1
+    autorefresh: 1
+    gpgcheck: 1
+    gpgkey: https://packages.icinga.com/icinga.key
+    priority: 90
+    type: rpm-md
+
+  icinga-snaphot:
+    name: icinga-snaphot
+    baseurl: https://packages.icinga.com/openSUSE/%{facts.os.release.full}/snapshot
+    enabled: 1
+    autorefresh: 1
+    gpgcheck: 1
+    gpgkey: https://packages.icinga.com/icinga.key
+    priority: 80
+    type: rpm-md

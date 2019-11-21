@@ -96,6 +96,12 @@ case "${ID}" in
     # Remove lock for bash-completion
     # TODO: I don't know where this lock comes from
     zypper removelock bash-completion
+
+    # Import Icinga GPG key
+    # TODO: should be handled by puppet...
+    if ! rpm -q gpg-pubkey-34410682-5287ce4e &>/dev/null; then
+      rpm --import https://packages.icinga.com/icinga.key
+    fi
     ;;
   *)
     fail "System ID ${ID} is not supported!"
