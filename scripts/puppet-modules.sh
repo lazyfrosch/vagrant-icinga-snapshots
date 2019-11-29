@@ -22,23 +22,23 @@ symlink_module() {
   fi
 }
 
-module_install puppetlabs-stdlib
-module_install puppetlabs-concat
-module_install puppetlabs-translate
+module_install puppetlabs-stdlib -v 6.1.0
+module_install puppetlabs-translate -v 2.0.0
+module_install puppetlabs-concat -v 6.1.0
 
-module_install lazyfrosch-vagrantenv
+module_install puppet-alternatives -v 2.1.0
+module_install lazyfrosch-vagrantenv -v 0.2.1
 
-module_install puppetlabs-apt
-module_install puppetlabs-apache
-module_install puppetlabs-ntp
-module_install puppetlabs-mysql
-module_install puppetlabs-yumrepo_core
+module_install puppetlabs-apt -v 7.2.0
+module_install puppetlabs-apache -v 5.2.0
+module_install puppetlabs-ntp -v 8.1.0
+module_install puppetlabs-mysql -v 10.2.1
+module_install puppetlabs-yumrepo_core -v 1.0.4
 
-module_install puppet-alternatives
-module_install puppet-zypprepo
+module_install puppet-zypprepo -v 2.2.2
 
-module_install icinga-icinga2
-module_install icinga-icingaweb2
+module_install icinga-icinga2 -v 2.3.0
+module_install icinga-icingaweb2 -v 2.3.1
 
 symlink_module /vagrant/puppet/profile
 symlink_module /vagrant/puppet/role
