@@ -62,9 +62,11 @@ case "${ID}" in
     fi
 
     # TODO: non centos?
-    if ! rpm -q centos-release-scl-rh &>/dev/null; then
-      echo "Installing CentOS SCL rh"
-      yum install -y centos-release-scl-rh
+    if [ "${VERSION_ID}" -eq 7 ] ; then
+      if ! rpm -q centos-release-scl-rh &>/dev/null; then
+        echo "Installing CentOS SCL rh"
+        yum install -y centos-release-scl-rh
+      fi
     fi
 
     if ! rpm -q puppet-agent &>/dev/null; then
