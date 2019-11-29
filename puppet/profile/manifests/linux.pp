@@ -3,7 +3,6 @@ class profile::linux(
   $yumrepos                    = {},
   $zypprepos                   = {},
 ) {
-  include ntp
   include vagrantenv
 
   $osfamily = $facts['os']['family']

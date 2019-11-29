@@ -31,7 +31,6 @@ module_install lazyfrosch-vagrantenv -v 0.2.1
 
 module_install puppetlabs-apt -v 7.2.0
 module_install puppetlabs-apache -v 5.2.0
-module_install puppetlabs-ntp -v 8.1.0
 module_install puppetlabs-mysql -v 10.2.1
 module_install puppetlabs-yumrepo_core -v 1.0.4
 
