@@ -15,6 +15,10 @@ class profile::icinga2 (
     $_const_ticket_salt = ''
   }
 
+  if $facts['os']['family'] == 'RedHat' {
+    ensure_packages(['nagios-plugins-all'])
+  }
+
   class { 'icinga2':
     #confd       => 'local.d',
     confd       => 'conf.d',
